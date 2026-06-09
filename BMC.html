@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Business Model Canvas</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+<style>
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #0f172a, #1e3a8a);
+  color: white;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  padding: 20px;
+  font-weight: 600;
+  font-size: 24px;
+}
+
+.header-info {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.header-info input {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: none;
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  background: rgba(255,255,255,0.15);
+  color: white;
+  outline: none;
+}
+
+.header-info input::placeholder { color: rgba(255,255,255,0.6); }
+
+.bmc {
+  width: 95%;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: 160px 160px 110px;
+  gap: 10px;
+}
+
+.box {
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(15px);
+  border-radius: 15px;
+  padding: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+  border: 1px solid rgba(255,255,255,0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.box:hover {
+  transform: scale(1.03);
+  background: rgba(59,130,246,0.35);
+  border-color: rgba(255,255,255,0.4);
+}
+
+.box.active {
+  background: rgba(59,130,246,0.45);
+  border: 1.5px solid rgba(255,255,255,0.6);
+}
+
+.box-icon { font-size: 22px; }
+.box-title { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
+.box-hint { font-size: 11px; opacity: 0.65; }
+
+.partners  { grid-row: 1 / span 2; }
+.activities{ grid-row: 1; }
+.resources { grid-row: 2; }
+.value     { grid-row: 1 / span 2; }
+.relations { grid-row: 1; }
+.channels  { grid-row: 2; }
+.segments  { grid-row: 1 / span 2; }
+.costs     { grid-column: 1 / span 3; }
+.revenue   { grid-column: 4 / span 2; }
+
+#detail-box {
+  margin: 20px auto;
+  width: 95%;
+  background: white;
+  color: #111;
+  padding: 25px 30px;
+  border-radius: 15px;
+  min-height: 130px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.detail-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1e3a8a;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.tag {
+  background: #dbeafe;
+  color: #1e40af;
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+.detail-body {
+  font-size: 14px;
+  color: #374151;
+  line-height: 1.7;
+}
+
+.empty {
+  text-align: center;
+  color: #888;
+  font-size: 15px;
+  padding: 15px 0;
+}
+
+</style>
+</head>
+<body>
+
+<h1>Business Model Canvas</h1>
+
+<div class="header-info">
+  <input placeholder="Pour qui">
+  <input placeholder="Créé par">
+  <input placeholder="Date">
+  <input placeholder="Version">
+</div>
+
+<div class="bmc">
+  <div class="box partners"  onclick="show('partners',this)">
+    <span class="box-icon">🤝</span>
+    <div class="box-title">Partenaires clés</div>
+    <div class="box-hint">Qui nous aide ?</div>
+  </div>
+  <div class="box activities" onclick="show('activities',this)">
+    <span class="box-icon">🔧</span>
+    <div class="box-title">Activités clés</div>
+    <div class="box-hint">Que faisons-nous ?</div>
+  </div>
+  <div class="box value" onclick="show('value',this)">
+    <span class="box-icon">⭐</span>
+    <div class="box-title">Proposition de valeur</div>
+    <div class="box-hint">Quel problème résolvons-nous ?</div>
+  </div>
+  <div class="box relations" onclick="show('relations',this)">
+    <span class="box-icon">💛</span>
+    <div class="box-title">Relation client</div>
+    <div class="box-hint">Comment on accompagne ?</div>
+  </div>
+  <div class="box segments" onclick="show('segments',this)">
+    <span class="box-icon">👥</span>
+    <div class="box-title">Segments clients</div>
+    <div class="box-hint">À qui s'adresse-t-on ?</div>
+  </div>
+  <div class="box resources" onclick="show('resources',this)">
+    <span class="box-icon">🗄️</span>
+    <div class="box-title">Ressources clés</div>
+    <div class="box-hint">De quoi avons-nous besoin ?</div>
+  </div>
+  <div class="box channels" onclick="show('channels',this)">
+    <span class="box-icon">📡</span>
+    <div class="box-title">Canaux</div>
+    <div class="box-hint">Comment on atteint les clients ?</div>
+  </div>
+  <div class="box costs" onclick="show('costs',this)">
+    <span class="box-icon">📉</span>
+    <div class="box-title">Structure des coûts</div>
+    <div class="box-hint">Que dépense-t-on ?</div>
+  </div>
+  <div class="box revenue" onclick="show('revenue',this)">
+    <span class="box-icon">💰</span>
+    <div class="box-title">Sources de revenus</div>
+    <div class="box-hint">Comment gagne-t-on de l'argent ?</div>
+  </div>
+</div>
+
+<div id="detail-box">
+  <div class="empty">✨ Cliquez sur une section pour afficher les détails</div>
+</div>
+
+<script>
+const data = {
+  partners: {
+    icon: "🤝",
+    title: "Partenaires clés",
+    tags: ["Hôpitaux & cliniques", "Laboratoires médicaux", "Ministère de la Santé", "Universités & chercheurs", "Hébergement cloud", "Logiciels médicaux"],
+    body: "Ce sont toutes les organisations avec lesquelles on collabore pour faire fonctionner le projet. Les hôpitaux nous fournissent les données et testent notre outil, les chercheurs nous aident à l'améliorer, et les fournisseurs cloud stockent nos données de façon sécurisée."
+  },
+  activities: {
+    icon: "🔧",
+    title: "Activités clés",
+    tags: ["Collecter les données patients", "Entraîner l'outil de détection", "Valider avec des médecins", "Créer l'interface web", "Mettre à jour régulièrement"],
+    body: "Ce qu'on fait au quotidien pour que notre solution fonctionne. On recueille les données médicales, on entraîne notre outil à reconnaître les signes de la maladie rénale, et on travaille avec des médecins pour s'assurer que les résultats sont fiables."
+  },
+  resources: {
+    icon: "🗄️",
+    title: "Ressources clés",
+    tags: ["Données de 400 patients", "Outil d'intelligence artificielle", "Serveurs sécurisés", "Experts en données & santé", "Propriété intellectuelle"],
+    body: "Ce dont on a besoin pour travailler. Nos données médicales anonymisées servent à entraîner l'outil, nos experts combinent compétences en informatique et en médecine, et nos serveurs assurent un accès rapide et sécurisé."
+  },
+  value: {
+    icon: "⭐",
+    title: "Proposition de valeur",
+    tags: ["Détection précoce de la maladie rénale", "Moins de diagnostics tardifs", "Aide les médecins à décider", "Rapport personnalisé par patient", "Simple à utiliser", "Résultats expliqués clairement", "Fiabilité élevée (+95%)"],
+    body: "Notre outil aide les médecins à repérer la maladie rénale chronique plus tôt, avant qu'elle ne s'aggrave. Il analyse les données du patient et donne un score de risque clair, avec des explications compréhensibles — sans nécessiter de formation technique."
+  },
+  relations: {
+    icon: "💛",
+    title: "Relation client",
+    tags: ["Assistance technique", "Formation des médecins", "Rapports réguliers", "Espace en ligne libre-service", "Guides et tutoriels"],
+    body: "Comment on accompagne nos utilisateurs. On forme les médecins à l'outil, on leur fournit des rapports sur leurs patients, et on reste disponibles si quelque chose ne fonctionne pas. Notre objectif : qu'ils puissent l'utiliser facilement sans dépendre de nous en permanence."
+  },
+  channels: {
+    icon: "📡",
+    title: "Canaux",
+    tags: ["Site web (tableau de bord)", "Connexion aux dossiers patients", "Congrès médicaux", "Partenariats avec facultés", "Réseaux professionnels de santé"],
+    body: "Comment les médecins et hôpitaux nous trouvent et utilisent notre outil. On se connecte directement aux logiciels qu'ils utilisent déjà pour les dossiers patients, et on se fait connaître lors des conférences médicales."
+  },
+  segments: {
+    icon: "👥",
+    title: "Segments clients",
+    tags: ["Néphrologues & généralistes", "Hôpitaux publics & CHU", "Cliniques privées", "Organismes de santé publique", "Patients à risque (diabète, HTA)", "Assureurs santé", "Facultés de médecine"],
+    body: "À qui s'adresse notre solution. En priorité, les médecins spécialistes des reins et les hôpitaux, qui voient régulièrement des patients à risque. Mais aussi les organismes de santé qui veulent prévenir les maladies chroniques à grande échelle."
+  },
+  costs: {
+    icon: "📉",
+    title: "Structure des coûts",
+    tags: ["Collecte & préparation des données", "Développement de l'outil IA", "Création du site web", "Serveurs & stockage", "Sécurité & conformité médicale", "Formation & support"],
+    body: "Ce que ça nous coûte de faire tourner le projet. Les plus gros postes de dépense sont le développement initial de l'outil et les serveurs pour le faire fonctionner, ainsi que la mise en conformité avec les réglementations sur les données médicales."
+  },
+  revenue: {
+    icon: "💰",
+    title: "Sources de revenus",
+    tags: ["Abonnement mensuel (hôpitaux)", "Subventions du Ministère", "Accès API pour logiciels médicaux", "Rapports analytiques", "Partenariats assureurs"],
+    body: "Comment on gagne de l'argent. Dans un premier temps, les hôpitaux paient un abonnement mensuel pour utiliser l'outil, et on bénéficie de financements publics. À terme, on vend aussi l'accès à notre technologie à d'autres éditeurs de logiciels médicaux."
+  }
+};
+
+let current = null;
+
+function show(key, el) {
+  if (current) current.classList.remove('active');
+  el.classList.add('active');
+  current = el;
+
+  const d = data[key];
+  const tags = d.tags.map(t => `<span class="tag">${t}</span>`).join('');
+
+  document.getElementById('detail-box').innerHTML = `
+    <div class="detail-title">${d.icon} ${d.title}</div>
+    <div class="tags">${tags}</div>
+    <div class="detail-body">${d.body}</div>
+  `;
+}
+</script>
+
+</body>
+</html>
