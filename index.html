@@ -1,367 +1,393 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>NephroAI — Business Model Canvas</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
-
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #0B1628, #0f2d5e);
-  color: white;
-  min-height: 100vh;
-  padding: 20px;
-}
-
-/* ── HEADER ── */
-.header {
-  text-align: center;
-  padding: 24px 0 8px;
-}
-.header-eyebrow {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  color: #06B6D4;
-  margin-bottom: 8px;
-}
-.header h1 {
-  font-size: 26px;
-  font-weight: 600;
-  margin-bottom: 6px;
-}
-.header h1 span { color: #06B6D4; }
-.header-sub {
-  font-size: 12px;
-  opacity: .55;
-  margin-bottom: 18px;
-}
-
-.header-info {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 22px;
-}
-.header-info input {
-  padding: 8px 14px;
-  border-radius: 8px;
-  border: 1px solid rgba(255,255,255,.15);
-  font-family: 'Poppins', sans-serif;
-  font-size: 12px;
-  background: rgba(255,255,255,.08);
-  color: white;
-  outline: none;
-  transition: .2s;
-}
-.header-info input::placeholder { color: rgba(255,255,255,.45); }
-.header-info input:focus {
-  border-color: #06B6D4;
-  background: rgba(6,182,212,.1);
-}
-
-/* ── BMC GRID ── */
-.bmc {
-  width: 97%;
-  margin: auto;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: 160px 160px 110px;
-  gap: 10px;
-}
-
-.box {
-  background: rgba(255,255,255,.07);
-  backdrop-filter: blur(15px);
-  border-radius: 15px;
-  padding: 16px;
-  cursor: pointer;
-  transition: .25s;
-  border: 1px solid rgba(255,255,255,.12);
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  position: relative;
-  overflow: hidden;
-}
-.box::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 15px;
-  opacity: 0;
-  transition: opacity .25s;
-  pointer-events: none;
-}
-.box:hover { transform: scale(1.03); border-color: rgba(255,255,255,.3); }
-.box:hover::after { opacity: 1; }
-.box.active {
-  border: 1.5px solid rgba(255,255,255,.5);
-  transform: scale(1.02);
-}
-
-/* per-block accent colours */
-.box.partners::after  { background: radial-gradient(ellipse at 20% 20%, rgba(124,58,237,.25), transparent 70%); }
-.box.activities::after{ background: radial-gradient(ellipse at 20% 20%, rgba(37,99,235,.25), transparent 70%); }
-.box.resources::after { background: radial-gradient(ellipse at 20% 80%, rgba(37,99,235,.2), transparent 70%); }
-.box.value::after     { background: radial-gradient(ellipse at 50% 50%, rgba(6,182,212,.22), transparent 70%); }
-.box.relations::after { background: radial-gradient(ellipse at 80% 20%, rgba(16,185,129,.22), transparent 70%); }
-.box.channels::after  { background: radial-gradient(ellipse at 80% 80%, rgba(234,88,12,.2), transparent 70%); }
-.box.segments::after  { background: radial-gradient(ellipse at 80% 50%, rgba(245,158,11,.2), transparent 70%); }
-.box.costs::after     { background: radial-gradient(ellipse at 20% 80%, rgba(244,63,94,.18), transparent 70%); }
-.box.revenue::after   { background: radial-gradient(ellipse at 80% 80%, rgba(16,185,129,.2), transparent 70%); }
-
-/* active tints */
-.box.partners.active  { background: rgba(124,58,237,.2); }
-.box.activities.active{ background: rgba(37,99,235,.2); }
-.box.resources.active { background: rgba(37,99,235,.18); }
-.box.value.active     { background: rgba(6,182,212,.18); }
-.box.relations.active { background: rgba(16,185,129,.18); }
-.box.channels.active  { background: rgba(234,88,12,.18); }
-.box.segments.active  { background: rgba(245,158,11,.18); }
-.box.costs.active     { background: rgba(244,63,94,.16); }
-.box.revenue.active   { background: rgba(16,185,129,.18); }
-
-/* grid placement */
-.partners  { grid-column: 1; grid-row: 1 / span 2; }
-.activities{ grid-column: 2; grid-row: 1; }
-.resources { grid-column: 2; grid-row: 2; }
-.value     { grid-column: 3; grid-row: 1 / span 2; }
-.relations { grid-column: 4; grid-row: 1; }
-.channels  { grid-column: 4; grid-row: 2; }
-.segments  { grid-column: 5; grid-row: 1 / span 2; }
-.costs     { grid-column: 1 / span 3; grid-row: 3; }
-.revenue   { grid-column: 4 / span 2; grid-row: 3; }
-
-.box-icon  { font-size: 22px; }
-.box-title { font-size: 11.5px; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; line-height: 1.3; }
-.box-hint  { font-size: 11px; opacity: .55; }
-
-/* value prop special */
-.value .box-icon { font-size: 26px; }
-.value .box-title { font-size: 12.5px; }
-
-/* ── DETAIL BOX ── */
-#detail-box {
-  margin: 14px auto 0;
-  width: 97%;
-  background: white;
-  color: #111;
-  padding: 24px 28px;
-  border-radius: 15px;
-  min-height: 130px;
-  box-shadow: 0 12px 50px rgba(0,0,0,.45);
-  animation: fadeIn .35s ease;
-}
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(12px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-.detail-title {
-  font-size: 15px;
-  font-weight: 600;
-  color: #0f2d5e;
-  margin-bottom: 12px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
-.tag {
-  font-size: 11px;
-  padding: 4px 11px;
-  border-radius: 20px;
-  font-weight: 600;
-}
-/* tag colour per section */
-.tag-violet { background: #ede9fe; color: #6d28d9; }
-.tag-blue   { background: #dbeafe; color: #1e40af; }
-.tag-cyan   { background: #cffafe; color: #0e7490; }
-.tag-green  { background: #d1fae5; color: #065f46; }
-.tag-orange { background: #ffedd5; color: #9a3412; }
-.tag-amber  { background: #fef3c7; color: #92400e; }
-.tag-rose   { background: #ffe4e6; color: #9f1239; }
-
-.detail-body {
-  font-size: 13.5px;
-  color: #374151;
-  line-height: 1.75;
-}
-
-.empty {
-  text-align: center;
-  color: #aaa;
-  font-size: 14px;
-  padding: 18px 0;
-}
-
-/* ── RESPONSIVE ── */
-@media (max-width: 860px) {
-  .bmc {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto;
+  :root {
+    --navy:   #0A1628;
+    --blue:   #0D4F8B;
+    --cyan:   #00C2D4;
+    --white:  #FFFFFF;
+    --offW:   #F0F4F8;
+    --muted:  #7A9CC0;
+    --dark:   #1A2B45;
+    --green:  #00B37E;
+    --amber:  #F59E0B;
+    --red:    #EF4444;
+    --violet: #7C3AED;
+    --card:   #0E2240;
   }
-  .partners,.activities,.resources,.value,
-  .relations,.channels,.segments,.costs,.revenue {
-    grid-column: auto; grid-row: auto;
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    min-height: 100vh;
+    padding: 20px;
   }
-}
-@media (max-width: 520px) {
-  .bmc { grid-template-columns: 1fr; }
-}
 
+  /* ===== HEADER ===== */
+  header {
+    text-align: center;
+    padding: 24px 0 20px;
+    border-bottom: 2px solid var(--blue);
+    margin-bottom: 22px;
+  }
+  header .brand { display: flex; align-items: center; justify-content: center; gap: 6px; margin-bottom: 6px; }
+  header .brand h1 { font-size: 2.2rem; font-weight: 800; letter-spacing: -1px; }
+  header .brand span { color: var(--cyan); }
+  header .subtitle { color: var(--muted); font-size: 0.95rem; }
+  header .tag { display: inline-block; background: var(--cyan); color: var(--navy); font-weight: 700; font-size: 0.72rem; padding: 3px 10px; border-radius: 20px; margin-top: 8px; letter-spacing: 0.5px; }
+
+  /* ===== GRID ===== */
+  .bmc-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1.4fr 1fr 1.6fr;
+    grid-template-rows: auto auto auto;
+    gap: 12px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  /* Cell placements */
+  .cell-partners   { grid-column: 1; grid-row: 1 / 3; }
+  .cell-activities { grid-column: 2; grid-row: 1; }
+  .cell-resources  { grid-column: 2; grid-row: 2; }
+  .cell-value      { grid-column: 3; grid-row: 1 / 3; }
+  .cell-relations  { grid-column: 4; grid-row: 1; }
+  .cell-channels   { grid-column: 4; grid-row: 2; }
+  .cell-segments   { grid-column: 5; grid-row: 1 / 3; }
+  .cell-costs      { grid-column: 1 / 4; grid-row: 3; }
+  .cell-revenue    { grid-column: 4 / 6; grid-row: 3; }
+
+  /* Card base */
+  .cell {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 18px 16px 16px;
+    border: 1px solid rgba(13,79,139,0.5);
+    transition: transform .2s, box-shadow .2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .cell:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.4);
+  }
+  .cell::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    border-radius: 12px 12px 0 0;
+  }
+  .cell-partners::before   { background: var(--violet); }
+  .cell-activities::before { background: var(--blue); }
+  .cell-resources::before  { background: var(--blue); }
+  .cell-value::before      { background: var(--cyan); }
+  .cell-relations::before  { background: var(--green); }
+  .cell-channels::before   { background: var(--amber); }
+  .cell-segments::before   { background: var(--amber); }
+  .cell-costs::before      { background: var(--red); }
+  .cell-revenue::before    { background: var(--green); }
+
+  /* Cell header */
+  .cell-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .cell-icon {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+  .icon-violet { background: rgba(124,58,237,.2); }
+  .icon-blue   { background: rgba(13,79,139,.3); }
+  .icon-cyan   { background: rgba(0,194,212,.15); }
+  .icon-green  { background: rgba(0,179,126,.2); }
+  .icon-amber  { background: rgba(245,158,11,.2); }
+  .icon-red    { background: rgba(239,68,68,.2); }
+
+  .cell-title { font-size: 0.85rem; font-weight: 700; color: var(--white); letter-spacing: 0.3px; }
+  .cell-who   { font-size: 0.68rem; color: var(--muted); margin-top: 1px; }
+
+  /* Tags */
+  .tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 12px; }
+  .tag-item {
+    font-size: 0.67rem;
+    padding: 3px 8px;
+    border-radius: 20px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .tag-violet { background: rgba(124,58,237,.25); color: #C4B5FD; border: 1px solid rgba(124,58,237,.4); }
+  .tag-blue   { background: rgba(13,79,139,.35); color: #93C5FD; border: 1px solid rgba(13,79,139,.6); }
+  .tag-cyan   { background: rgba(0,194,212,.15); color: var(--cyan); border: 1px solid rgba(0,194,212,.35); }
+  .tag-green  { background: rgba(0,179,126,.2); color: #6EE7B7; border: 1px solid rgba(0,179,126,.4); }
+  .tag-amber  { background: rgba(245,158,11,.2); color: #FCD34D; border: 1px solid rgba(245,158,11,.4); }
+  .tag-red    { background: rgba(239,68,68,.2); color: #FCA5A5; border: 1px solid rgba(239,68,68,.4); }
+
+  /* Body text */
+  .cell-body { font-size: 0.72rem; color: var(--muted); line-height: 1.55; }
+
+  /* Value prop special */
+  .cell-value .cell-title { font-size: 0.95rem; }
+  .value-highlight {
+    background: rgba(0,194,212,.1);
+    border: 1px solid rgba(0,194,212,.25);
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin-bottom: 10px;
+    font-size: 0.72rem;
+    color: var(--cyan);
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  /* Revenue tier cards */
+  .revenue-tiers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 12px; }
+  .tier {
+    background: rgba(0,0,0,.25);
+    border-radius: 8px;
+    padding: 10px 8px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,.08);
+  }
+  .tier.featured { border-color: var(--cyan); background: rgba(0,194,212,.08); }
+  .tier-name  { font-size: 0.72rem; font-weight: 700; margin-bottom: 3px; }
+  .tier-price { font-size: 1.0rem; font-weight: 800; color: var(--white); margin-bottom: 4px; }
+  .tier-desc  { font-size: 0.63rem; color: var(--muted); line-height: 1.4; }
+  .tier-badge { display: inline-block; background: var(--cyan); color: var(--navy); font-size: 0.58rem; font-weight: 800; padding: 1px 6px; border-radius: 10px; margin-bottom: 4px; }
+
+  /* Costs layout */
+  .costs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .cost-item {
+    display: flex; align-items: flex-start; gap: 8px;
+    background: rgba(0,0,0,.2);
+    border-radius: 8px;
+    padding: 10px;
+  }
+  .cost-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--red); flex-shrink: 0; margin-top: 4px; }
+  .cost-text { font-size: 0.7rem; color: var(--muted); line-height: 1.4; }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid var(--blue);
+    font-size: 0.72rem;
+    color: var(--muted);
+  }
+  footer strong { color: var(--cyan); }
+
+  @media print {
+    body { background: white; color: black; }
+    .cell { border: 1px solid #ccc; background: #f9f9f9; }
+  }
 </style>
 </head>
 <body>
 
-<div class="header">
-  <p class="header-eyebrow">Business Model Canvas</p>
-  <h1>Nephro<span>AI</span></h1>
-  <p class="header-sub">Intelligence artificielle au service de la néphrologie algérienne — Prédiction du risque ESRD</p>
+<header>
+  <div class="brand">
+    <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="36" height="36" rx="8" fill="#0D4F8B"/>
+      <path d="M18 8C13.6 8 10 11.6 10 16c0 2.8 1.4 5.3 3.5 6.8V26h9v-3.2C24.6 21.3 26 18.8 26 16c0-4.4-3.6-8-8-8z" fill="#00C2D4" opacity=".9"/>
+      <path d="M15 16h6M18 13v6" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+    <h1>Nephro<span>AI</span></h1>
+  </div>
+  <p class="subtitle">Intelligence artificielle au service de la néphrologie algérienne — Prédiction du risque ESRD</p>
+  <span class="tag">BUSINESS MODEL CANVAS</span>
+</header>
+
+<div class="bmc-grid">
+
+  <!-- PARTENAIRES CLÉS -->
+  <div class="cell cell-partners">
+    <div class="cell-header">
+      <div class="cell-icon icon-violet">🤝</div>
+      <div><div class="cell-title">Partenaires Clés</div><div class="cell-who">Qui nous aide ?</div></div>
+    </div>
+    <div class="tags">
+      <span class="tag-item tag-violet">CHU & hôpitaux publics</span>
+      <span class="tag-item tag-violet">Cliniques de dialyse privées</span>
+      <span class="tag-item tag-violet">Sociétés Algériennes de Néphrologie</span>
+      <span class="tag-item tag-violet">Universités de médecine</span>
+      <span class="tag-item tag-violet">AWS / Azure (cloud)</span>
+      <span class="tag-item tag-violet">Éditeurs LIS / HIS locaux</span>
+      <span class="tag-item tag-violet">Ministère de la Santé (MSPRH)</span>
+      <span class="tag-item tag-violet">Laboratoires d'analyses médicales</span>
+    </div>
+    <p class="cell-body">Les CHU et cliniques fournissent les données cliniques et valident notre outil sur le terrain. Les universités améliorent le modèle IA, et les fournisseurs cloud assurent un stockage sécurisé conforme aux normes médicales algériennes. Le MSPRH ouvre les portes à l'adoption institutionnelle.</p>
+  </div>
+
+  <!-- ACTIVITÉS CLÉS -->
+  <div class="cell cell-activities">
+    <div class="cell-header">
+      <div class="cell-icon icon-blue">⚙️</div>
+      <div><div class="cell-title">Activités Clés</div><div class="cell-who">Que faisons-nous ?</div></div>
+    </div>
+    <div class="tags">
+      <span class="tag-item tag-blue">Entraînement modèle XGBoost</span>
+      <span class="tag-item tag-blue">Collecte & annotation des données</span>
+      <span class="tag-item tag-blue">Développement plateforme web & API</span>
+      <span class="tag-item tag-blue">Validation médicale & certification</span>
+      <span class="tag-item tag-blue">Re-training trimestriel</span>
+      <span class="tag-item tag-blue">Support technique 24/7</span>
+    </div>
+    <p class="cell-body">Entraînement et amélioration continue du modèle XGBoost sur des données cliniques réelles, développement de l'interface web et validation avec des néphrologues.</p>
+  </div>
+
+  <!-- PROPOSITION DE VALEUR -->
+  <div class="cell cell-value">
+    <div class="cell-header">
+      <div class="cell-icon icon-cyan">✨</div>
+      <div><div class="cell-title">Proposition de Valeur</div><div class="cell-who">Quel problème résolvons-nous ?</div></div>
+    </div>
+    <div class="value-highlight">
+      "Détecter le risque d'insuffisance rénale terminale (ESRD) avant qu'il ne soit trop tard — sans formation technique requise."
+    </div>
+    <div class="tags">
+      <span class="tag-item tag-cyan">Prédiction ESRD à 98% de précision</span>
+      <span class="tag-item tag-cyan">Détection précoce avant aggravation</span>
+      <span class="tag-item tag-cyan">Aide à la décision clinique tracée</span>
+      <span class="tag-item tag-cyan">Rapport PDF en un clic</span>
+      <span class="tag-item tag-cyan">Historique & suivi longitudinal</span>
+      <span class="tag-item tag-cyan">Interface multilingue FR / AR / EN</span>
+      <span class="tag-item tag-cyan">Résultats clairs & explicables</span>
+      <span class="tag-item tag-cyan">29 paramètres analysés</span>
+    </div>
+    <p class="cell-body">Notre modèle XGBoost analyse 29 paramètres cliniques et biologiques du patient, puis génère un score de risque clair avec rapport PDF exportable. Résultat : moins de diagnostics tardifs, meilleures décisions, meilleurs pronostics pour les patients algériens atteints de MRC.</p>
+  </div>
+
+  <!-- RELATIONS CLIENTS -->
+  <div class="cell cell-relations">
+    <div class="cell-header">
+      <div class="cell-icon icon-green">💬</div>
+      <div><div class="cell-title">Relation Client</div><div class="cell-who">Comment on accompagne ?</div></div>
+    </div>
+    <div class="tags">
+      <span class="tag-item tag-green">Onboarding guidé</span>
+      <span class="tag-item tag-green">Support chat & email (Pro)</span>
+      <span class="tag-item tag-green">Webinaires cliniques mensuels</span>
+      <span class="tag-item tag-green">Compte dédié cliniques</span>
+      <span class="tag-item tag-green">Tutoriels intégrés</span>
+    </div>
+    <p class="cell-body">Formation à l'outil lors de l'onboarding, support prioritaire pour le plan Pro, webinaires cliniques réguliers. Objectif : autonomie dès la première semaine.</p>
+  </div>
+
+  <!-- CANAUX -->
+  <div class="cell cell-channels">
+    <div class="cell-header">
+      <div class="cell-icon icon-amber">📡</div>
+      <div><div class="cell-title">Canaux</div><div class="cell-who">Comment on atteint les clients ?</div></div>
+    </div>
+    <div class="tags">
+      <span class="tag-item tag-amber">Application web nephroai.dz</span>
+      <span class="tag-item tag-amber">API REST HIS / LIS</span>
+      <span class="tag-item tag-amber">Congrès médicaux (SAN, SMI)</span>
+      <span class="tag-item tag-amber">Facultés de médecine</span>
+      <span class="tag-item tag-amber">Réseaux KOL néphrologues</span>
+    </div>
+    <p class="cell-body">Accès via l'application web et une API REST pour intégration directe dans les logiciels de gestion hospitalière (HIS/LIS). Présence dans les congrès algériens et via les leaders d'opinion médicaux.</p>
+  </div>
+
+  <!-- RESSOURCES CLÉS -->
+  <div class="cell cell-resources">
+    <div class="cell-header">
+      <div class="cell-icon icon-blue">🧠</div>
+      <div><div class="cell-title">Ressources Clés</div><div class="cell-who">De quoi avons-nous besoin ?</div></div>
+    </div>
+    <div class="tags">
+      <span class="tag-item tag-blue">Modèle XGBoost (esrd_pipeline.pkl)</span>
+      <span class="tag-item tag-blue">Dataset 12k+ patients annotés</span>
+      <span class="tag-item tag-blue">Équipe ML + conseillers médicaux</span>
+      <span class="tag-item tag-blue">Infrastructure Flask + BDD</span>
+      <span class="tag-item tag-blue">Propriété intellectuelle</span>
+    </div>
+    <p class="cell-body">Pipeline XGBoost entraîné sur 12 000+ cas cliniques réels (98% de précision). Équipe pluridisciplinaire ML + médecine. Infrastructure garantissant sécurité et disponibilité 24h/24.</p>
+  </div>
+
+  <!-- SEGMENTS CLIENTS -->
+  <div class="cell cell-segments">
+    <div class="cell-header">
+      <div class="cell-icon icon-amber">👥</div>
+      <div><div class="cell-title">Segments Clients</div><div class="cell-who">À qui s'adresse-t-on ?</div></div>
+    </div>
+    <div class="tags">
+      <span class="tag-item tag-amber">Néphrologues en cabinet</span>
+      <span class="tag-item tag-amber">Internistes & diabétologues</span>
+      <span class="tag-item tag-amber">Cliniques de dialyse (multi-sites)</span>
+      <span class="tag-item tag-amber">CHU & hôpitaux de wilayas</span>
+      <span class="tag-item tag-amber">Médecins généralistes</span>
+      <span class="tag-item tag-amber">Chercheurs & résidents</span>
+    </div>
+    <p class="cell-body">En priorité, les néphrologues et internistes qui suivent des patients diabétiques ou hypertendus à risque élevé d'ESRD. Mais aussi les grandes structures hospitalières souhaitant intégrer l'IA dans leur parcours de soin rénal, et les chercheurs qui exploitent des données cliniques anonymisées.</p>
+  </div>
+
+  <!-- STRUCTURE DES COÛTS -->
+  <div class="cell cell-costs">
+    <div class="cell-header">
+      <div class="cell-icon icon-red">📉</div>
+      <div><div class="cell-title">Structure des Coûts</div><div class="cell-who">Que dépense-t-on ?</div></div>
+    </div>
+    <div class="costs-grid">
+      <div class="cost-item"><div class="cost-dot"></div><div class="cost-text"><strong style="color:#FCA5A5">Développement & maintenance</strong><br/>Plateforme web, API, infrastructure Flask</div></div>
+      <div class="cost-item"><div class="cost-dot"></div><div class="cost-text"><strong style="color:#FCA5A5">Infrastructure cloud & sécurité</strong><br/>Hébergement AWS/Azure conforme DZ</div></div>
+      <div class="cost-item"><div class="cost-dot"></div><div class="cost-text"><strong style="color:#FCA5A5">Salaires équipe</strong><br/>Ingénieurs ML + conseillers médicaux</div></div>
+      <div class="cost-item"><div class="cost-dot"></div><div class="cost-text"><strong style="color:#FCA5A5">Re-training IA trimestriel</strong><br/>Collecte, annotation, mise à jour pipeline</div></div>
+      <div class="cost-item"><div class="cost-dot"></div><div class="cost-text"><strong style="color:#FCA5A5">Certifications & conformité</strong><br/>Réglementation médicale algérienne</div></div>
+      <div class="cost-item"><div class="cost-dot"></div><div class="cost-text"><strong style="color:#FCA5A5">Marketing & acquisition</strong><br/>Congrès médicaux, KOL, démarchage CHU</div></div>
+    </div>
+  </div>
+
+  <!-- SOURCES DE REVENUS -->
+  <div class="cell cell-revenue">
+    <div class="cell-header">
+      <div class="cell-icon icon-green">💰</div>
+      <div><div class="cell-title">Sources de Revenus</div><div class="cell-who">Comment gagne-t-on de l'argent ?</div></div>
+    </div>
+    <div class="revenue-tiers">
+      <div class="tier">
+        <div class="tier-name" style="color:var(--muted)">Freemium</div>
+        <div class="tier-price">0 DA</div>
+        <div class="tier-desc">5 prédictions/mois<br/>Acquisition & découverte</div>
+      </div>
+      <div class="tier featured">
+        <div class="tier-badge">★ PRO</div>
+        <div class="tier-name" style="color:var(--cyan)">Pro</div>
+        <div class="tier-price">800 DA<span style="font-size:.65rem;font-weight:400;color:var(--muted)">/mois</span></div>
+        <div class="tier-desc">Praticien individuel<br/>Support prioritaire</div>
+      </div>
+      <div class="tier">
+        <div class="tier-name" style="color:var(--green)">Clinique</div>
+        <div class="tier-price">2 000 DA<span style="font-size:.65rem;font-weight:400;color:var(--muted)">/mois</span></div>
+        <div class="tier-desc">Multi-sites illimité<br/>Dashboard admin</div>
+      </div>
+      <div class="tier">
+        <div class="tier-name" style="color:var(--amber)">API / R&D</div>
+        <div class="tier-price" style="font-size:.85rem">Sur devis</div>
+        <div class="tier-desc">Intégration HIS/LIS<br/>Partenariats recherche</div>
+      </div>
+    </div>
+    <p class="cell-body" style="font-size:.68rem">Modèle freemium → Pro pour l'acquisition individuelle. Plan Clinique = revenu récurrent principal. À moyen terme, monétisation via API et partenariats R&D avec les facultés de médecine.</p>
+  </div>
+
 </div>
 
-<div class="header-info">
-  <input placeholder="Pour qui" value="Médecins & structures de santé DZ">
-  <input placeholder="Créé par" value="Équipe NephroAI">
-  <input placeholder="Date" value="2025">
-  <input placeholder="Version" value="v1.0">
-</div>
-
-<div class="bmc">
-
-  <div class="box partners" onclick="show('partners',this)">
-    <span class="box-icon">🤝</span>
-    <div class="box-title">Partenaires clés</div>
-    <div class="box-hint">Qui nous aide ?</div>
-  </div>
-
-  <div class="box activities" onclick="show('activities',this)">
-    <span class="box-icon">⚙️</span>
-    <div class="box-title">Activités clés</div>
-    <div class="box-hint">Que faisons-nous ?</div>
-  </div>
-
-  <div class="box value" onclick="show('value',this)">
-    <span class="box-icon">✨</span>
-    <div class="box-title">Proposition de valeur</div>
-    <div class="box-hint">Quel problème résolvons-nous ?</div>
-  </div>
-
-  <div class="box relations" onclick="show('relations',this)">
-    <span class="box-icon">💬</span>
-    <div class="box-title">Relation client</div>
-    <div class="box-hint">Comment on accompagne ?</div>
-  </div>
-
-  <div class="box segments" onclick="show('segments',this)">
-    <span class="box-icon">👥</span>
-    <div class="box-title">Segments clients</div>
-    <div class="box-hint">À qui s'adresse-t-on ?</div>
-  </div>
-
-  <div class="box resources" onclick="show('resources',this)">
-    <span class="box-icon">🧠</span>
-    <div class="box-title">Ressources clés</div>
-    <div class="box-hint">De quoi avons-nous besoin ?</div>
-  </div>
-
-  <div class="box channels" onclick="show('channels',this)">
-    <span class="box-icon">📡</span>
-    <div class="box-title">Canaux</div>
-    <div class="box-hint">Comment on atteint les clients ?</div>
-  </div>
-
-  <div class="box costs" onclick="show('costs',this)">
-    <span class="box-icon">📉</span>
-    <div class="box-title">Structure des coûts</div>
-    <div class="box-hint">Que dépense-t-on ?</div>
-  </div>
-
-  <div class="box revenue" onclick="show('revenue',this)">
-    <span class="box-icon">💰</span>
-    <div class="box-title">Sources de revenus</div>
-    <div class="box-hint">Comment gagne-t-on de l'argent ?</div>
-  </div>
-
-</div>
-
-<div id="detail-box">
-  <div class="empty">✨ Cliquez sur une section pour afficher les détails</div>
-</div>
-
-<script>
-const data = {
-  partners: {
-    icon: "🤝", title: "Partenaires clés", color: "violet",
-    tags: ["CHU & hôpitaux publics", "Cliniques de dialyse privées", "Sociétés Algériennes de Néphrologie", "Universités de médecine", "Fournisseurs cloud (AWS / Azure)", "Éditeurs LIS / HIS locaux", "Ministère de la Santé (MSPRH)", "Laboratoires d'analyses médicales"],
-    body: "Ce sont toutes les organisations avec lesquelles on collabore pour faire fonctionner NephroAI. Les CHU et cliniques nous fournissent les données cliniques et valident notre outil sur le terrain. Les universités nous aident à améliorer le modèle IA, et les fournisseurs cloud assurent un stockage sécurisé et conforme aux normes médicales algériennes."
-  },
-  activities: {
-    icon: "⚙️", title: "Activités clés", color: "blue",
-    tags: ["Entraînement du modèle XGBoost", "Collecte & annotation des données", "Développement plateforme web & API", "Validation médicale & certification", "Re-training trimestriel", "Support technique 24/7"],
-    body: "Ce qu'on fait au quotidien pour que NephroAI fonctionne. On entraîne et affine le modèle XGBoost sur des données cliniques réelles, on développe l'interface web utilisée par les médecins, et on travaille avec des néphrologues pour valider que les prédictions sont fiables et exploitables en situation clinique."
-  },
-  resources: {
-    icon: "🧠", title: "Ressources clés", color: "blue",
-    tags: ["Modèle XGBoost (esrd_pipeline.pkl)", "Dataset 12 k+ patients annotés", "Équipe ML + conseillers médicaux", "Infrastructure Flask + base de données", "Propriété intellectuelle & certifications"],
-    body: "Ce dont on a besoin pour opérer. Notre atout central est le pipeline XGBoost entraîné sur plus de 12 000 cas cliniques réels, capable de prédire le risque ESRD avec 98 % de précision. Notre équipe combine expertise en machine learning et en médecine, et notre infrastructure garantit sécurité et disponibilité 24 h/24."
-  },
-  value: {
-    icon: "✨", title: "Proposition de valeur", color: "cyan",
-    tags: ["Prédiction ESRD à 98 % de précision", "Détection précoce avant aggravation", "Aide à la décision clinique tracée", "Rapport PDF en un clic", "Historique & suivi longitudinal patient", "Interface multilingue FR / AR / EN", "Résultats clairs, explicables"],
-    body: "NephroAI aide les médecins algériens à repérer le risque d'insuffisance rénale terminale (ESRD) avant qu'il ne soit trop tard. Notre modèle XGBoost analyse 29 paramètres cliniques et biologiques du patient, puis génère un score de risque clair avec rapport PDF exportable — sans aucune formation technique requise. Résultat : moins de diagnostics tardifs, meilleures décisions, meilleurs pronostics."
-  },
-  relations: {
-    icon: "💬", title: "Relation client", color: "green",
-    tags: ["Onboarding guidé & formation médicale", "Support chat & email prioritaire (Pro)", "Webinaires cliniques mensuels", "Compte dédié pour les cliniques", "Tableau de bord multi-sites", "Guides & tutoriels intégrés"],
-    body: "Comment on accompagne nos utilisateurs au quotidien. On forme les médecins à l'outil lors de sessions d'onboarding, on reste disponibles via chat et email pour le plan Pro, et on organise des webinaires cliniques pour partager les bonnes pratiques. Notre objectif : que chaque praticien soit autonome et confiant dès la première semaine."
-  },
-  channels: {
-    icon: "📡", title: "Canaux", color: "orange",
-    tags: ["Application web (nephroai.dz)", "API REST pour intégration HIS / LIS", "Congrès médicaux (SAN, SMI)", "Partenariats avec facultés de médecine", "Réseaux de néphrologues (KOL)", "Démarchage direct cliniques & CHU"],
-    body: "Comment les médecins et hôpitaux nous trouvent et utilisent notre outil. L'accès principal se fait via l'application web. Pour les grandes structures, on propose une API REST qui s'intègre directement dans leurs logiciels de gestion de patients (HIS/LIS). Nous nous faisons également connaître lors des congrès médicaux algériens et via les leaders d'opinion en néphrologie."
-  },
-  segments: {
-    icon: "👥", title: "Segments clients", color: "amber",
-    tags: ["Néphrologues en cabinet privé", "Internistes & diabétologues", "Cliniques de dialyse (multi-sites)", "CHU & hôpitaux de wilayas", "Médecins généralistes (dépistage)", "Chercheurs & résidents en médecine"],
-    body: "À qui s'adresse NephroAI. En priorité, les néphrologues et internistes qui suivent des patients diabétiques ou hypertendus à risque élevé d'ESRD. Mais aussi les grandes structures hospitalières qui veulent intégrer l'IA dans leur parcours de soin rénal, et les chercheurs qui souhaitent exploiter des données cliniques anonymisées pour leurs travaux."
-  },
-  costs: {
-    icon: "📉", title: "Structure des coûts", color: "rose",
-    tags: ["Développement & maintenance plateforme", "Infrastructure cloud & sécurité", "Salaires équipe tech + conseillers médicaux", "Re-training modèle IA (trimestriel)", "Certifications & conformité réglementaire DZ", "Marketing & acquisition (congrès, KOL)", "Formation & support utilisateurs"],
-    body: "Ce que ça nous coûte de faire tourner NephroAI. Les postes principaux sont le développement continu de la plateforme, l'hébergement cloud sécurisé conforme aux exigences médicales algériennes, et les salaires de notre équipe pluridisciplinaire. Les cycles de re-training trimestriels du modèle IA et la mise en conformité réglementaire représentent également des investissements récurrents importants."
-  },
-  revenue: {
-    icon: "💰", title: "Sources de revenus", color: "green",
-    tags: ["Freemium — 0 DA / mois (5 préd.)", "Pro — 800 DA / mois / praticien", "Clinique — 2 000 DA / mois (multi-sites)", "Licences API pour éditeurs HIS / LIS", "Partenariats R&D & données anonymisées", "Formation & certification professionnelle"],
-    body: "Comment NephroAI génère des revenus. Notre modèle freemium permet à tout médecin d'essayer l'outil gratuitement (5 prédictions/mois). Les praticiens actifs passent au plan Pro à 800 DA/mois, et les cliniques multi-sites souscrivent au plan Clinique à 2 000 DA/mois. À moyen terme, on monétise aussi l'API pour intégration dans les logiciels médicaux et les partenariats de recherche avec les facultés de médecine."
-  }
-};
-
-let current = null;
-
-function show(key, el) {
-  if (current) current.classList.remove('active');
-  el.classList.add('active');
-  current = el;
-
-  const d = data[key];
-  const tags = d.tags.map(t => `<span class="tag tag-${d.color}">${t}</span>`).join('');
-
-  document.getElementById('detail-box').innerHTML = `
-    <div class="detail-title">${d.icon} ${d.title}</div>
-    <div class="tags">${tags}</div>
-    <div class="detail-body">${d.body}</div>
-  `;
-}
-</script>
+<footer>
+  <strong>NephroAI</strong> · Intelligence artificielle au service de la néphrologie algérienne ·
+  Rahim Dalila Ledda · dalilarahim73@gmail.com ·
+  Encadrants : M. Nemmich · M. Fahsi
+</footer>
 
 </body>
 </html>
